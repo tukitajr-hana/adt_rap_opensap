@@ -1,0 +1,21 @@
+projection;
+//strict ( 2 );
+
+define behavior for ZC_RAP_ATRAV_379  alias Travel
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Booking { create; }
+}
+
+define behavior for ZC_RAP_ABOOK_379 alias Booking
+use etag
+{
+  use update;
+  use delete;
+
+  use association _Travel;
+}
