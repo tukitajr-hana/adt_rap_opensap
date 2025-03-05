@@ -1,0 +1,11 @@
+@EndUserText.label: 'Travel status'
+define type zty_travel_sts : abap.char(1) enum
+{
+  UNKNOWN  = initial;
+  @EndUserText.label: 'Open'
+  open     = 'O';
+  @EndUserText.label: 'Accepted'
+  accepted = 'A';
+  @EndUserText.label: 'Canceled'
+  canceled = 'X';
+}
