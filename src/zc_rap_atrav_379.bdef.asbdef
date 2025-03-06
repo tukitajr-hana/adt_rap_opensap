@@ -1,5 +1,5 @@
 projection;
-//strict ( 2 );
+strict ( 2 );
 
 define behavior for ZC_RAP_ATRAV_379  alias Travel
 use etag
