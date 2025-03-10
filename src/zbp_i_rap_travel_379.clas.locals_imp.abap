@@ -481,8 +481,8 @@ CLASS lhc_Travel IMPLEMENTATION.
     CHECK travels IS NOT INITIAL.
 
 *   In this example the authorization is defined based on the Activity + Travel Status
-*   For the Travel Status we need the before-image from the database.
-*   We perform this for active (is_draft=00) as well as for drafts (is_draft=01)
+*   For the "Travel Status" we need the before-image from the database.
+*   We perform this for active (%is_draft=00) as well as for drafts (%is_draft=01) %is_draft
 *   as we can't distinguish between edit or new drafts
     SELECT FROM zrap_atrav_379
       FIELDS travel_uuid,overall_status
@@ -493,9 +493,9 @@ CLASS lhc_Travel IMPLEMENTATION.
 
     is_update_requested = COND #( WHEN requested_authorizations-%update              = if_abap_behv=>mk-on OR
                                        requested_authorizations-%action-acceptTravel = if_abap_behv=>mk-on OR
-                                       requested_authorizations-%action-rejectTravel = if_abap_behv=>mk-on
+                                       requested_authorizations-%action-rejectTravel = if_abap_behv=>mk-on or
 *                                       requested_authorizations-%action-Prepare      = if_abap_behv=>mk-on OR
-*                                       requested_authorizations-%action-Edit         = if_abap_behv=>mk-on OR
+                                       requested_authorizations-%action-Edit         = if_abap_behv=>mk-on
 *                                        requested_authorizations-%assoc-_Booking      = if_abap_behv=>mk-on
                                   THEN abap_true ELSE abap_false ).
 
@@ -556,7 +556,7 @@ CLASS lhc_Travel IMPLEMENTATION.
                       %action-acceptTravel = COND #( WHEN update_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )
                       %action-rejectTravel = COND #( WHEN update_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )
 *                      %action-Prepare      = COND #( WHEN update_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )
-*                      %action-Edit         = COND #( WHEN update_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )
+                      %action-Edit         = COND #( WHEN update_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )
 *                       %assoc-_Booking      = COND #( WHEN update_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )
 
                       %delete              = COND #( WHEN delete_granted = abap_true THEN if_abap_behv=>auth-allowed ELSE if_abap_behv=>auth-unauthorized )

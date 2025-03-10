@@ -1,24 +1,32 @@
 projection;
 strict ( 2 );
+use draft;
 
-define behavior for ZC_RAP_ATRAV_379  alias Travel
-use etag
+define behavior for ZC_RAP_ATRAV_379 alias Travel
+//use etag " OData V2 not suport
 {
   use create;
   use update;
   use delete;
 
-  use association _Booking { create; }
+  use association _Booking { create; with draft; }
 
-   use action acceptTravel;
-   use action rejectTravel;
+  use action acceptTravel;
+  use action rejectTravel;
+
+//Draft
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
 }
 
 define behavior for ZC_RAP_ABOOK_379 alias Booking
-use etag
+//use etag " OData V2 not suport
 {
   use update;
   use delete;
 
-  use association _Travel;
+  use association _Travel { with draft; }
 }

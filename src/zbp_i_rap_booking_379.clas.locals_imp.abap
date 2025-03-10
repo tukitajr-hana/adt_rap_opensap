@@ -62,6 +62,7 @@ CLASS lhc_Booking IMPLEMENTATION.
     ENTITY Booking
       UPDATE FIELDS ( BookingID )
        WITH lf_update
+       FAILED DATA(update_failed)
     REPORTED DATA(update_reported).
 
     reported = CORRESPONDING #( DEEP update_reported ).
